@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:include="~{/fragments/head}"></th:block>
+</head>
+
+<body>
+<div class="container">
+    <div class="row rounded">
+        <div class="col-12">
+            <nav class="navbar navbar-expand-xl navbar-light bg-light rounded">
+                <th:block th:include="~{/fragments/nav}"></th:block>
+            </nav>
+        </div>
+    </div>
+    <!-- row -->
+    <div class="row tm-mt-big justify-content-center">
+        <div class="col-xl-8 col-lg-10 col-md-12 col-sm-12">
+            <div class="bg-white tm-block">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="tm-block-title d-inline-block">Add Exercise</h2>
+                    </div>
+                </div>
+                <div class="row mt-4 tm-edit-product-row">
+                    <div class="col-xl-7 col-lg-7 col-md-12">
+                        <form th:action="/exercises/add" th:method="POST"
+                             th:object="${exerciseBindingAddModel}" class="tm-edit-product-form">
+                            <div class="input-group mb-3">
+                                <label for="name" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Name
+                                </label>
+                                <input id="name" name="name" type="text"
+                                      th:field="*{name}" class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7"/>
+
+                            </div>
+                            <div class="input-group mb-3 justify-content-center">
+
+                                <small th:each="e : ${#fields.errors('name')}" th:text="${e}" class="text-danger"></small>
+
+                            </div>
+                            <div class="input-group mb-3">
+                                <label for="addedOn" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">StartedOn
+                                    Date
+                                </label>
+                                <input th:field="*{addedOn}" id="addedOn" name="addedOn" type="datetime-local"
+                                       class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7"
+                                       data-large-mode="true"/>
+
+                            </div>
+                            <div class="input-group mb-3 justify-content-center">
+
+                                <small th:each="e : ${#fields.errors('addedOn')}" th:text="${e}" class="text-danger"></small>
+
+                            </div>
+                            <div class="input-group mb-3 ">
+
+                                <label for="dueDate" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Due Date
+                                </label>
+                                <input th:field="*{dueDate}" id="dueDate" name="dueDate" type="datetime-local"
+                                       class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7"
+                                       data-large-mode="true"/>
+                            </div>
+                            <div class="input-group mb-3 justify-content-center">
+
+                                <small th:each="e : ${#fields.errors('dueDate')}" th:text="${e}" class="text-danger"></small>
+
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="ml-auto col-xl-8 col-lg-8 col-md-8 col-sm-7 pl-0">
+                                    <button type="submit" class="btn btn-primary">Add
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-12 mx-auto mb-4">
+                        <img src="/img/2.jpg" alt="Exercise picture" width="100%">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="row">
+        <th:block th:include="~{/fragments/footer}"></th:block>
+    </footer>
+</div>
+
+</body>
+
+</html>

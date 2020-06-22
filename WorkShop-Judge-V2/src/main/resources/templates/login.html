@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:include="~{/fragments/head}">
+    </th:block>
+</head>
+
+<body>
+<div class="container ">
+    <nav class="navbar navbar-expand-xl navbar-light bg-light rounded">
+        <th:block th:include="~{/fragments/guest-nav}"></th:block>
+    </nav>
+    <div class="container mt-lg-5 border-right border-bottom bg-transparent h-100">
+        <h1 class="w-100 text-light text-right">Login</h1>
+    </div>
+    <div class="row tm-mt-big">
+        <div class="col-12 mx-auto tm-login-col">
+            <div class="bg-white tm-block">
+                <div class="row">
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <form th:action="@{/users/login}" th:method="POST"
+                              th:object="${userLoginBindingModel}" class="tm-login-form">
+							  <div class="text-center">
+							  <th:block th:if="${notFound}">
+							        <small class="text-danger col-12 text-center">Incorrect username or password</small>
+									<br/>
+                              </th:block>
+                                  <th:block th:each="e : ${#fields.errors()}">
+									<small th:text="${e}" class="text-danger col-12 text-center"></small>
+									<br/><hr/>
+                                  </th:block>
+							 </div>
+                             <hr/>
+                            <div class="input-group">
+                                <label for="username" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Username</label>
+                                <input th:field="*{username}"name="username" type="text"
+                                       class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7"
+                                       id="username" placeholder="Username" required>
+                            </div>
+                            <div class="input-group mt-3">
+                                <label for="password" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Password</label>
+                                <input name="password" type="password" class="form-control validate"
+                                       id="password" placeholder="Password" required>
+                            </div>
+                            <div class="input-group mt-3">
+                                <button type="submit" class="btn btn-primary d-inline-block mx-auto">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<footer class="row">
+        <th:block th:include="~{/fragments/footer}"></th:block>
+    </footer>
+</div>
+
+</body>
+
+</html>
