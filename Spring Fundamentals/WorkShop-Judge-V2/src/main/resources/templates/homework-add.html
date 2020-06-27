@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:include="~{fragments/head}"></th:block>
+
+</head>
+
+<body>
+<div class="container">
+    <div class="row rounded">
+        <div class="col-12">
+             <nav class="navbar navbar-expand-xl navbar-light bg-light rounded" >
+                 <th:block th:include="~{fragments/nav}"></th:block>
+
+             </nav>
+        </div>
+    </div>
+    <!-- row -->
+    <div class="row tm-mt-big justify-content-center">
+        <div class="col-xl-8 col-lg-10 col-md-12 col-sm-12 ">
+            <div class="bg-white tm-block">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="tm-block-title d-inline-block">Add your homework</h2>
+                    </div>
+                </div>
+                <div class="row mt-4 tm-edit-product-row ">
+                    <div class="col-xl-7 col-lg-7 col-md-12">
+                        <form th:object="${homeworkAddBindingModel}" th:action="@{/homework/add}" method="POST" class="tm-edit-product-form">
+                            
+                                <div th:if="${isLate}" class="input-group mb-3">
+                                    <h1>You late</h1>
+                                </div>
+                            
+                            <div class="input-group mb-3">
+                                <label for="exercise" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Exercises</label>
+                                <select class="custom-select col-xl-9 col-lg-8 col-md-8 col-sm-7" id="exercise"
+                                        name="exercise">
+                                    <option selected>Select exercise</option>
+                                    
+                                        <option th:each="ex : ${allExNames}" th:text="${ex}" th:value="${ex}"></option>
+
+                                    
+                                </select>
+                            </div>
+                            <div class="input-group mb-3">
+                                <label for="gitAddress" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">
+                                    Github address
+                                </label>
+                                <input th:field="*{gitAddress}" th:errorclass="bg-danger" id="gitAddress" name="gitAddress" type="text"
+                                       class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7">
+                            </div>
+									
+                                <small th:each="e : ${#fields.errors('gitAddress')}" th:text="${e}" class="text-danger" ></small>
+                            
+
+                            <div class="input-group mb-3">
+                                <div class="ml-auto col-xl-8 col-lg-8 col-md-8 col-sm-7 pl-0">
+                                    <button type="submit" class="btn btn-primary">Add
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-12 mx-auto mb-4">
+                        <img src="/img/homework.png" alt="Homework picture" width="100%">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<footer class="row">
+    <th:block th:include="~{fragments/footer}"></th:block>
+
+</footer>
+</div>
+
+
+</body>
+
+</html>

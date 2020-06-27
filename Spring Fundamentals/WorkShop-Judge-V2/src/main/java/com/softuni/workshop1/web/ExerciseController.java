@@ -29,6 +29,7 @@ public class ExerciseController {
     public String add(@Valid @ModelAttribute("exerciseBindingAddModel")
                                   ExerciseBindingAddModel exerciseBindingAddModel,
                       BindingResult bindingResult){
+
         return "exercise-add";
     }
 
