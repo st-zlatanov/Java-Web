@@ -11,7 +11,7 @@ public interface ProductService {
     void addProduct(ProductServiceModel productServiceModel);
 
     List<ProductViewModel> findAllProducts();
-
+    String productPriceSum();
     void delete(String id);
     void deleteAll();
 }

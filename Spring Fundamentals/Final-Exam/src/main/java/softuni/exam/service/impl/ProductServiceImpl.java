@@ -45,6 +45,17 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
+    @Override
+    public String productPriceSum() {
+
+        final BigDecimal[] totalPrice = {BigDecimal.ZERO};
+        this.productRepository.findAll()
+                .forEach(product -> {
+                    totalPrice[0] = totalPrice[0].add(product.getPrice());
+                });
+        return totalPrice[0].toString();
+    }
+
 
     @Override
     public void delete(String id) {

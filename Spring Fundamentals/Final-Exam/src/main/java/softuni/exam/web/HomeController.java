@@ -26,6 +26,7 @@ public class HomeController {
         if (httpSession.getAttribute("user") == null) {
             modelAndView.setViewName("index");
         } else {
+            modelAndView.addObject("priceSum", this.productService.productPriceSum());
             modelAndView.addObject("products", this.productService.findAllProducts());
             modelAndView.setViewName("home");
 
