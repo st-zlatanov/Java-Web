@@ -1,15 +1,18 @@
 package softuni.exam.web;
 
+import org.dom4j.rule.Mode;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import softuni.exam.model.binding.ProductAddBindingModel;
 import softuni.exam.model.service.ProductServiceModel;
 import softuni.exam.service.ProductService;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -24,12 +27,17 @@ public class ProductController {
     }
 
     @GetMapping("/add")
-    public String add(Model model){
-        if(!model.containsAttribute("productAddBindingModel")){
-            model.addAttribute("productAddBindingModel", new ProductAddBindingModel());
+    public ModelAndView add(HttpSession httpSession, ModelAndView modelAndView, Model model){
+        if (httpSession.getAttribute("user") == null) {
+            modelAndView.setViewName("index");
+        } else {
+            if(!model.containsAttribute("productAddBindingModel")){
+                model.addAttribute("productAddBindingModel", new ProductAddBindingModel());
+            }
+            modelAndView.setViewName("product-add");
         }
 
-        return "product-add";
+        return modelAndView;
     }
 
     @PostMapping("/add")

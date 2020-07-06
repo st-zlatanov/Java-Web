@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 
 public class UserRegisterBindingModel {
@@ -27,6 +28,7 @@ public class UserRegisterBindingModel {
     }
 
     @Email(message = "Enter valid email!")
+    @NotNull
     public String getEmail() {
         return email;
     }

@@ -70,7 +70,7 @@ public class UserController {
                                       @ModelAttribute("userRegisterBindingModel")UserRegisterBindingModel userRegisterBindingModel,
                                   BindingResult bindingResult, RedirectAttributes redirectAttributes){
         if(bindingResult.hasErrors() ||
-                !userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())){
+                !userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword()) || userRegisterBindingModel.getEmail().equals("")){
 
             redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
